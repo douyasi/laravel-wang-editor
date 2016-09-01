@@ -1,0 +1,23 @@
+{
+    "name": "douyasi/laravel-wang-editor",
+    "description": "wangEditor for laravel",
+    "keywords": ["laravel", "wangEditor", "web editor", "douyasi", "wysiwyg"],
+    "authors": [
+        {
+            "name": "raoyc",
+            "email": "raoyc2009@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Douyasi\\WangEditor\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
