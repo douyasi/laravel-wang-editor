@@ -31,7 +31,7 @@ php artisan vendor:publish --force
 
 ![](http://douyasi.com/usr/uploads/2016/09/2381793435.gif)
 
-编辑器图片默认会上传到 `public/uploads/content` 目录下；编辑器相关功能配置位于 `config/editor.php` 文件中。
+编辑器图片默认会上传到 `public/uploads/content` 目录下；编辑器相关功能配置位于 `config/wang-editor.php` 文件中。
 
 ## 使用说明
 
