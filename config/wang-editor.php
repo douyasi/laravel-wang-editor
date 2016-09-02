@@ -33,7 +33,7 @@ return [
     'pasteFilter' => 'false',
 
     /*
-    只粘贴纯文本，前提你开启着粘贴样式过滤，即 `pasteFilter` 为 `true` ，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/156691
+    是否只粘贴纯文本，前提你开启着粘贴样式过滤，即 `pasteFilter` 为 `true` ，这里可选字符串的 `true` 或 `false` ，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/156691
      */
     'pasteText' => 'false',
 
