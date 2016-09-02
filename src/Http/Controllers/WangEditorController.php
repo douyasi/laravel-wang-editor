@@ -36,7 +36,7 @@ class WangEditorController extends Controller
                 $name = $file->getClientOriginalName();
                 $ext = $file->getClientOriginalExtension();
 
-                $check_ext = in_array($ext, ['gif', 'jpg', 'png'], true);
+                $check_ext = in_array($ext, ['gif', 'jpg', 'jpeg', 'png'], true);
 
                 if ($check_ext) {
                     $uniqid = uniqid().'_'.date('s');
