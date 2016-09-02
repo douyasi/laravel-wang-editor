@@ -26,8 +26,8 @@ function we_css()
 
 /**
  * wangEditor js 相关依赖
- * 实际上，editor.md 某些功能组件（如`flowChart`）置 false，可减少对应的js依赖，但为了安全起见还是将所有可能的js依赖列出。
- * 
+ *
+ * @param boolean $using_min 是否使用压缩版js，默认true
  * @return string
  */
 function we_js($using_min = true)

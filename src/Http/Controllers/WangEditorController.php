@@ -50,7 +50,7 @@ class WangEditorController extends Controller
                         $res = 'error|失败原因为：文件校验失败';
                     }
                 } else {
-                    $res = 'error|失败原因为：文件类型不允许,请上传常规的图片（gif|jpg|png）文件';
+                    $res = 'error|失败原因为：文件类型不允许,请上传常规的图片(gif、jpg、jpeg与png)文件';
                 }
             } else {
                 $res = 'error|'.$validator->messages()->first();
