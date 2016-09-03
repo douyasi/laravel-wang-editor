@@ -18,9 +18,7 @@ function we_css()
             margin: 0 auto;
             position: relative;
         }
-</style>
-
-';
+</style>';
 
 }
 
@@ -34,13 +32,13 @@ function we_js($using_min = true)
 {
 
     if ($using_min) {
-        return '<!--editor.md js-->
+        return '<!--wangEditor js-->
 <script type="text/javascript">
     window.jQuery || document.write(unescape("%3Cscript%20type%3D%22text/javascript%22%20src%3D%22//cdn.bootcss.com/jquery/2.2.4/jquery.min.js%22%3E%3C/script%3E"));
 </script>
 <script type="text/javascript" src="/vendor/wangEditor/dist/js/wangEditor.min.js"></script>';
     } else {
-        return '<!--editor.md js-->
+        return '<!--wangEditor js-->
 <script type="text/javascript">
     window.jQuery || document.write(unescape("%3Cscript%20type%3D%22text/javascript%22%20src%3D%22//cdn.bootcss.com/jquery/2.2.4/jquery.min.js%22%3E%3C/script%3E"));
 </script>
@@ -190,6 +188,79 @@ _{$editor_id}.create();
 </script>
 EOT;
 
-return $we_script;
+    return $we_script;
+
+}
+
+/**
+ * wangEditor 简版配置js代码
+ * 移除以下组件：
+ * 图片（包含图片上传）、视频（iframe）、位置（百度地图）、插入代码
+ * 
+ * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `mdeditor` 字符串
+ * @param int $z_index 编辑器全屏时z-index值
+ * @return string
+ */
+function we_simple_config($editor_id = 'wangeditor', $z_index = 999999)
+{
+    $printLog = config('wang-editor.printLog', 'true');
+    $pasteFilter = config('wang-editor.pasteFilter', 'false');
+    $pasteText = 'true';
+    if ($pasteFilter == 'true') {
+        $pasteText = config('wang-editor.pasteText', 'true');
+    }
+    $we_script = <<<EOT
+<!--wangEditor config-->
+<script type="text/javascript">
+var menus = [
+    'source',
+    '|',
+    'bold',
+    'underline',
+    'italic',
+    'strikethrough',
+    'eraser',
+    'forecolor',
+    'bgcolor',
+    '|',
+    'quote',
+    'fontfamily',
+    'fontsize',
+    'head',
+    'unorderlist',
+    'orderlist',
+    'alignleft',
+    'aligncenter',
+    'alignright',
+    '|',
+    'link',
+    'unlink',
+    'table',
+    'emotion',
+    '|',
+    'undo',
+    'redo',
+    'fullscreen'
+];
+wangEditor.config.printLog = {$printLog};
+var _{$editor_id} = new wangEditor('{$editor_id}');
+_{$editor_id}.config.menus = menus;
+_{$editor_id}.config.zindex = {$z_index};
+var _pasteFilter = {$pasteFilter};
+_{$editor_id}.config.pasteFilter = _pasteFilter;
+if (_pasteFilter == true) {
+    _{$editor_id}.config.pasteText = {$pasteText};
+}
+_{$editor_id}.config.emotions = {
+        'default': {
+            title: '默认',
+            data: '/vendor/wangEditor/emotions.data'
+        }
+    };
+_{$editor_id}.create();
+</script>
+EOT;
+
+    return $we_script;
 
 }
