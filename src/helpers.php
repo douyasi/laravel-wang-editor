@@ -10,15 +10,7 @@ function we_css()
 
     return '<!--wangEditor css-->
 <link rel="stylesheet" type="text/css" href="/vendor/wangEditor/dist/css/wangEditor.min.css">
-<link rel="stylesheet" type="text/css" href="/vendor/wangEditor/static/highlightjs/github.css">
-<style>
-        .we-container {
-            width: 100%;
-            height: 400px;
-            margin: 0 auto;
-            position: relative;
-        }
-</style>';
+<link rel="stylesheet" type="text/css" href="/vendor/wangEditor/static/highlightjs/github.css">';
 
 }
 
