@@ -2,6 +2,7 @@
     "name": "douyasi/laravel-wang-editor",
     "description": "wangEditor for laravel",
     "keywords": ["laravel", "wangEditor", "web editor", "douyasi", "wysiwyg"],
+    "license": "MIT",
     "authors": [
         {
             "name": "raoyc",

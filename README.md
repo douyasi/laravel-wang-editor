@@ -2,6 +2,11 @@
 
 >  `wangEditor` 基于javascript和css开发的 Web富文本编辑器， 轻量、简洁、易用、开源免费。官方网站：http://www.wangeditor.com/ 。
 
+[![Latest Stable Version](https://poser.pugx.org/douyasi/laravel-wang-editor/v/stable.svg?format=flat-square)](https://packagist.org/packages/douyasi/laravel-wang-editor)
+[![Latest Unstable Version](https://poser.pugx.org/douyasi/laravel-wang-editor/v/unstable.svg?format=flat-square)](https://packagist.org/packages/douyasi/laravel-wang-editor)
+[![License](https://poser.pugx.org/douyasi/laravel-wang-editor/license?format=flat-square)](https://packagist.org/packages/douyasi/laravel-wang-editor)
+[![Total Downloads](https://poser.pugx.org/douyasi/laravel-wang-editor/downloads?format=flat-square)](https://packagist.org/packages/douyasi/laravel-wang-editor)
+
 ## 兼容版本
 
 本扩展包经过测试，适配 `Laravel 5.1` 以上稳定版本（`5.0` 版本理论上也是可行的，但未经测试）。
