@@ -10,6 +10,20 @@ class WangEditorController extends Controller
 {
 
     /**
+     * 示例页面
+     *
+     * @return Response
+     */
+    public function getExample()
+    {
+        if (config('app.debug', false)) {
+            return view('wang-editor::example');
+        } else {
+            return 'You can see the example page only in DEBUG mode!';
+        }
+    }
+
+    /**
      * 针对editor.md所写的图片上传控制器
      * 
      * @param  Request $requst
