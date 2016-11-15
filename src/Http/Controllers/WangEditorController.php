@@ -42,6 +42,7 @@ class WangEditorController extends Controller
                 'wang-editor-image-file.max'    => '文件过大,文件大小不得超出5MB',
             ];
             $validator = Validator::make($data, $rules, $messages);
+            $res = 'error|失败原因为：非法传参';
             if ($validator->passes()) {
                 $realPath = $file->getRealPath();
                 $destPath = 'uploads/content/';
