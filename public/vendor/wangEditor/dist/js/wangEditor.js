@@ -2453,6 +2453,7 @@ _e(function (E, $) {
             var $elem;
             var nodeName = elem.nodeName.toLowerCase();
             var nodeType = elem.nodeType;
+            var childNodesClone;
 
             // 只处理文本和普通node标签
             if (nodeType !== 3 && nodeType !== 1) {
@@ -2463,8 +2464,14 @@ _e(function (E, $) {
 
             // 如果是容器，则继续深度遍历
             if (nodeName === 'div') {
-                $.each(elem.childNodes, function () {
+                childNodesClone = [];
+                $.each(elem.childNodes, function (index, item) {
                     // elem.childNodes 可获取TEXT节点，而 $elem.children() 就获取不到
+                    // 先将 elem.childNodes 拷贝一份，一面在循环递归过程中 elem 发生变化
+                    childNodesClone.push(item);
+                });
+                // 遍历子元素，执行操作
+                $.each(childNodesClone, function () {
                     handle(this);
                 });
                 return;
@@ -3390,6 +3397,9 @@ _e(function (E, $) {
     // 是否粘贴纯文本，当 editor.config.pasteFilter === false 时候，此配置将失效
     E.config.pasteText = false;
 
+    // 插入代码时，默认的语言
+    E.config.codeDefaultLang = 'javascript';
+
 });
 // 全局UI
 _e(function (E, $) {
@@ -3995,7 +4005,11 @@ _e(function (E, $) {
                 value = value.replace(/<script[\s\S]*?<\/script>/ig, '');
             }
             // 赋值
-            $txt.html(value);
+            try {
+                $txt.html(value);
+            } catch (ex) {
+                // 更新 html 源码出错，一般都是取消了 js 过滤之后，js报错导致的
+            }
         }
 
         // 定义click事件
@@ -4017,6 +4031,11 @@ _e(function (E, $) {
 
             // 赋值
             $code.val($txt.html());
+
+            // 监控变化
+            $code.on('change', function (e) {
+                updateValue();
+            });
 
             // 渲染
             $txt.after($code).hide();
@@ -5417,7 +5436,7 @@ _e(function (E, $) {
             var width = parseInt($widthInput.val());
             var height = parseInt($heightInput.val());
             var $div = $('<div>');
-            var html = '<p style="text-align:center;">{content}</p>';
+            var html = '<p>{content}</p>';
 
             // 验证数据
             if (!link) {
@@ -5883,7 +5902,8 @@ _e(function (E, $) {
         setTimeout(loadHljs, 0);
 
         var editor = this;
-        var lang = editor.config.lang;
+        var config = editor.config;
+        var lang = config.lang;
         var $txt = editor.txt.$txt;
 
         // 创建 menu 对象
@@ -5919,7 +5939,14 @@ _e(function (E, $) {
                     'margin-left': '5px'
                 });
                 $.each(hljs.listLanguages(), function (key, lang) {
-                    $langSelect.append('<option value="' + lang + '">' + lang + '</option>');
+                    if (lang === 'xml') {
+                        lang = 'html';
+                    }
+                    if (lang === config.codeDefaultLang) {
+                        $langSelect.append('<option value="' + lang + '" selected="selected">' + lang + '</option>');
+                    } else {
+                        $langSelect.append('<option value="' + lang + '">' + lang + '</option>');
+                    }
                 });
             } else {
                 $langSelect.hide();
@@ -6042,7 +6069,7 @@ _e(function (E, $) {
                 }
 
                 var rangeElem = editor.getRangeElem();
-                if ($.trim($(rangeElem).text())) {
+                if ($.trim($(rangeElem).text()) && codeTpl.indexOf('<p><br></p>') !== 0) {
                     codeTpl = '<p><br></p>' + codeTpl;
                 }
 
@@ -6817,7 +6844,7 @@ _e(function (E, $) {
             editor: editor,
             uploadUrl: uploadImgUrl,
             timeout: uploadTimeout,
-            fileAccept: 'image/*'    // 只允许选择图片 
+            fileAccept: 'image/jpg,image/jpeg,image/png,image/gif,image/bmp'    // 只允许选择图片 
         });
 
         // 选择本地文件，上传
@@ -7361,6 +7388,7 @@ _e(function (E, $) {
         var editor = this;
         var txt = editor.txt;
         var $txt = txt.$txt;
+        var html = '';
         // 说明：设置了 max-height 之后，$txt.parent() 负责滚动处理
         var $currentTxt = editor.useMaxHeight ? $txt.parent() : $txt;
         var $currentTable;
@@ -7396,8 +7424,20 @@ _e(function (E, $) {
             // 统一执行命令的方法
             var commandFn;
             function command(e, callback) {
+                // 执行命令之前，先存储html内容
+                html = $txt.html();
+                // 监控内容变化
+                var cb = function  () {
+                    if (callback) {
+                        callback();
+                    }
+                    if (html !== $txt.html()) {
+                        $txt.change();
+                    }
+                };
+                // 执行命令
                 if (commandFn) {
-                    editor.customCommand(e, commandFn, callback);
+                    editor.customCommand(e, commandFn, cb);
                 }
             }
 
@@ -7540,6 +7580,7 @@ _e(function (E, $) {
         var lang = editor.config.lang;
         var txt = editor.txt;
         var $txt = txt.$txt;
+        var html = '';
         // 说明：设置了 max-height 之后，$txt.parent() 负责滚动处理
         var $currentTxt = editor.useMaxHeight ? $txt.parent() : $txt;
         var $editorContainer = editor.$editorContainer;
@@ -7585,6 +7626,9 @@ _e(function (E, $) {
                 if (url != null) {
                     currentLink = url;
                 }
+                if (html !== $txt.html()) {
+                    $txt.change();
+                }
             };
             var $link;
             var inLink = false;
@@ -7625,6 +7669,9 @@ _e(function (E, $) {
 
             // 执行命令
             if (commandFn) {
+                // 记录下执行命令之前的html内容
+                html = $txt.html();
+                // 执行命令
                 editor.customCommand(e, commandFn, callback);
             }
         }
@@ -7671,8 +7718,20 @@ _e(function (E, $) {
             // 统一执行命令的方法
             var commandFn;
             function customCommand(e, callback) {
+                var cb;
+                // 记录下执行命令之前的html内容
+                html = $txt.html();
+                cb = function () {
+                    if (callback) {
+                        callback();
+                    }
+                    if (html !== $txt.html()) {
+                        $txt.change();
+                    }
+                };
+                // 执行命令
                 if (commandFn) {
-                    editor.customCommand(e, commandFn, callback);
+                    editor.customCommand(e, commandFn, cb);
                 }
             }
 

@@ -7,6 +7,14 @@
 [![License](https://poser.pugx.org/douyasi/laravel-wang-editor/license?format=flat-square)](https://packagist.org/packages/douyasi/laravel-wang-editor)
 [![Total Downloads](https://poser.pugx.org/douyasi/laravel-wang-editor/downloads?format=flat-square)](https://packagist.org/packages/douyasi/laravel-wang-editor)
 
+## 更新日志
+
+* 2016-11-15 修复反馈过来的几个 `bug` ，更新 `wangEditor` 到 `2.1.22` 版本。
+
+>   `wangEditor` 新版 `css字体` 路径相对于旧版有所变更，需要删除 `public\vendor\wangEditor` 目录下文件重新发布扩展包资源（执行后文 `php artisan vendor:publish --force` 命令）。
+
+* 2016-09-02 发布初版。
+
 ## 兼容版本
 
 本扩展包经过测试，适配 `Laravel 5.1` 以上稳定版本（`5.0` 版本理论上也是可行的，但未经测试）。
@@ -34,7 +42,7 @@ php artisan vendor:publish --force
 
 现在您可以访问 `/laravel-wang-editor/example` 路由，不出意外，您可以看到扩展包提供的示例页面。
 
-![](http://douyasi.com/usr/uploads/2016/09/2381793435.gif?2016-09-02-12-41-03)
+![](http://douyasi.com/usr/uploads/2016/09/2381793435.gif?2016-11-15)
 
 编辑器图片默认会上传到 `public/uploads/content` 目录下；编辑器相关功能配置位于 `config/wang-editor.php` 文件中。
 
