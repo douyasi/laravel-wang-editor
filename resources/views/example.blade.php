@@ -8,9 +8,10 @@
 <body>
 <h2>wangEditor example</h2>
 
-    <textarea class="form-control" name="content" id="wangeditor" style="display:none;height:400px;" cols="5">
-<h1>wangEditor for Laravel</h1>
-<p>wangEditor example</p>
+    <div id="wangeditor">
+        <p>wangEditor for Laravel</p>
+    </div>
+    <textarea class="form-control" name="content" id="wangeditor_text" style="display:none;height:400px;" cols="5">
     </textarea>
 
 {!! we_js() !!}
