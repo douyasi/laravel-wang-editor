@@ -56,6 +56,8 @@ function we_config($editor_id = 'wangeditor', $z_index = 999999)
     $token = csrf_token();
     $showLinkImg = config('wang-editor.showLinkImg', 'false');
     $uploadImgShowBase64 = config('wang-editor.uploadImgShowBase64', 'false');
+    $uploadImgMaxSize = config('wang-editor.uploadImgMaxSize', 5*1024*1024);
+    $uploadImgMaxLength = config('wang-editor.uploadImgMaxLength', 5);
     $we_script = <<<EOT
 <!--wangEditor config-->
 <script type="text/javascript">
@@ -90,11 +92,17 @@ if (_uploadImgShowBase64 == false) {
     var _token = "{$token}";
     if (_token != '') {
         _{$editor_id}.customConfig.uploadImgParams = {
-            token : _token
+            _token : _token
         };
     }
 
-    _{$editor_id}.customConfig.uploadImgFileName = "wang-editor-image-file";
+    _{$editor_id}.customConfig.uploadFileName = "wang-editor-image-file[]";
+    _{$editor_id}.customConfig.uploadImgMaxSize = {$uploadImgMaxSize};
+    _{$editor_id}.customConfig.uploadImgMaxLength = {$uploadImgMaxLength};
+    // _{$editor_id}.customConfig.uploadImgParamsWithUrl = true;
+    _{$editor_id}.customConfig.customAlert = function (info) {
+        alert('上传图片失败， 原因为 ' + info);
+    };
 } else {
     _{$editor_id}.customConfig.uploadImgShowBase64 = true;
 }
