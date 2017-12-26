@@ -64,7 +64,7 @@ var E = window.wangEditor;
 var _{$editor_id} = new E('#{$editor_id}');
 _{$editor_id}.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0;  // 开启 debug 模式
 _{$editor_id}.customConfig.zIndex = 1000;  // z_index 设置
-var _{$editor_id}_text = $('#{$editor_id}');
+var _{$editor_id}_text = $('#{$editor_id}_text');
 
 
 _{$editor_id}.customConfig.onchange = function (html) {
