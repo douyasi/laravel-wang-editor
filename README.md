@@ -9,6 +9,10 @@
 
 ## 更新日志
 
+>   适配 `wangEditor` 3.x 版本的扩展包，请查阅 [master](https://github.com/douyasi/laravel-wang-editor/tree/master) 分支。
+
+* 2017-12-26 更新 `readme` 文档，发布 1.x 版本。
+
 * 2016-11-15 修复反馈过来的几个 `bug` ，更新 `wangEditor` 到 `2.1.22` 版本。
 
 >   `wangEditor` 新版 `css字体` 路径相对于旧版有所变更，需要删除 `public\vendor\wangEditor` 目录下文件重新发布扩展包资源（执行后文 `php artisan vendor:publish --force` 命令）。
@@ -19,12 +23,10 @@
 
 本扩展包经过测试，适配 `Laravel 5.1` 以上稳定版本（`5.0` 版本理论上也是可行的，但未经测试）。
 
->   特别说明：
->   `composer` 分析某些依赖时可能会出现问题：比如在 `Laravel 5.2` 主项目中，安装本扩展包，可能会装上 `5.3` 版本的 `illuminate/support` 与 `illuminate/contracts` 相关依赖包，这样可能会造成 `5.2` 主项目出现错误。为此，本包在 `composer.json` 特别移除对 `"illuminate/support": "~5.1"` 的依赖。
 
 ## 安装与配置
 
-在 `composer.json` 新增 `"douyasi/laravel-wang-editor": "dev-master"` 依赖，然后执行： `composer update` 操作。
+在 `composer.json` 新增 `"douyasi/laravel-wang-editor": "~1.0"` 依赖，然后执行： `composer update` 操作。
 
 依赖安装完毕之后，在 `app.php` 中添加：
 
