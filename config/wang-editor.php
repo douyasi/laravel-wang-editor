@@ -6,35 +6,48 @@
  */
 return [
 
-    /*
-     是否关闭浏览器打印log，这里可选字符串的 `true` 或 `false` ，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/113982 
+    /**
+     * 粘贴文本，这里可选字符串的 `true` 或 `false` 
+     *
+     * 参考：https://www.kancloud.cn/wangfupeng/wangeditor3/448202
      */
-    'printLog' => 'true',
+    'pasteFilterStyle' => 'false',  // false - 关闭掉粘贴样式的过滤
+    'pasteTextpasteTextHandle' => 'function (content) {
+        // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
+        return content;
+    }',
 
-    /*
-    上传文件接口，详细介绍：http://www.kancloud.cn/wangfupeng/wangeditor2/113990
-    本插件已提供相关Laravel接口，保持默认值即可直接使用
-    */
-    'uploadImgUrl' => '/laravel-wang-editor/upload',
-
-    /*
-    可选 icon 或 value ，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/113977
+    /**
+     * 下面两个配置，使用其中一个即可显示 “上传图片” 的tab。但是两者不要同时使用！！！
+     *
+     * 参考：https://www.kancloud.cn/wangfupeng/wangeditor3/335780
      */
-    'emotionsShow' => 'icon',
+    'uploadImgShowBase64' => 'false',  // true - 使用 base64 编码图片；当为 false 时会使用下面服务器上传图片
+    'uploadImgServer' => '/laravel-wang-editor/upload',
 
-    /*
-     百度地图key，这里是wangEditor插件作者默认的key，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/113979
+    /**
+     * 前端限制上传的图片大小，默认5MB = 5*1024*1024 
+     *
+     * 如果使用本扩展包上传服务，后台也是限制 5MB ，某些条件下上传成功与否还受 php.ini 相关配置限制， 如 upload_max_filesize ， post_max_size 等配置
      */
-    'mapAk' => 'TVhjYjq1ICT2qqL5LdS8mwas',
+    'uploadImgMaxSize' => 5*1024*1024,
 
-    /*
-    是否关闭关闭粘贴过滤样式，这里可选字符串的 `true` 或 `false` ，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/113984
+    /**
+     * 限制一次最多能传几张图片
+     * 
      */
-    'pasteFilter' => 'false',
+    'uploadImgMaxLength' => 5,
 
-    /*
-    是否只粘贴纯文本，前提你开启着粘贴样式过滤，即 `pasteFilter` 为 `true` ，这里可选字符串的 `true` 或 `false` ，参考：http://www.kancloud.cn/wangfupeng/wangeditor2/156691
+    /**
+     * 是否使用本扩展包提供的本地图片上传组件服务
      */
-    'pasteText' => 'false',
+    'usingLocalPackageUploadServer' => true,  // true - 使用本扩展包提供的本地图片上传组件服务，请保持 'uploadImgServer' => '/laravel-wang-editor/upload' 为默认值
+
+    /**
+     * 隐藏 “网络图片” tab
+     *
+     * 参考：https://www.kancloud.cn/wangfupeng/wangeditor3/335780
+     */
+    'showLinkImg' => 'false',  // false - 隐藏 “网络图片” tab
 
 ];
