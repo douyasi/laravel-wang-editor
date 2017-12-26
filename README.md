@@ -43,7 +43,7 @@ php artisan vendor:publish --force
 
 现在您可以访问 `/laravel-wang-editor/example` 路由，不出意外，您可以看到扩展包提供的示例页面。
 
-![](http://s1.ystatic.cn/v/9067ff068918189ef850da17acb1d806.mp4)
+演示视频： http://s1.ystatic.cn/v/9067ff068918189ef850da17acb1d806.mp4
 
 编辑器图片默认会上传到 `public/uploads/content` 目录下；编辑器相关功能配置位于 `config/wang-editor.php` 文件中。
 
