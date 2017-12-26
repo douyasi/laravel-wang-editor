@@ -42,10 +42,9 @@ function we_js($using_min = true)
  * wangEditor 初始化配置js代码
  * 
  * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `mdeditor` 字符串
- * @param int $z_index 编辑器全屏时z-index值
  * @return string
  */
-function we_config($editor_id = 'wangeditor', $z_index = 999999)
+function we_config($editor_id = 'wangeditor')
 {
     $uploadImgServer = config('wang-editor.uploadImgServer', '/laravel-wang-editor/upload');
     $pasteFilterStyle = config('wang-editor.pasteFilterStyle', 'false');
@@ -118,4 +117,23 @@ EOT;
 
     return $we_script;
 
+}
+
+/**
+ * wangEditor form field 快捷生成
+ * 
+ * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `mdeditor` 字符串
+ * @param  string $default 编辑器默认正文内容
+ * @return string
+ */
+function we_field($editor_id = 'wangeditor', $default = '')
+{
+    $html = <<<EOT
+<div id="{$editor_id}">
+    {$default}
+</div>
+<textarea class="form-control" name="content" id="{$editor_id}_text" style="display:none;height:400px;" cols="5">
+</textarea>
+EOT;
+    return $html;
 }
