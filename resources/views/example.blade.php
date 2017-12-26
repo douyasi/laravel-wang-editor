@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>wangEditor example</h2>
-{!! we_field('wangeditor', '<p>wangEditor for Laravel</p>') !!}
+{!! we_field('wangeditor', 'content', '<p>wangEditor for Laravel</p>') !!}
 {!! we_config('wangeditor') !!}
 </body>
 </html>
