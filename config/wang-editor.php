@@ -15,15 +15,15 @@ return [
     'pasteTextpasteTextHandle' => 'function (content) {
         // content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
         return content;
-    }',
+    }',  // 粘贴内容自定义回调函数
 
     /**
      * 下面两个配置，使用其中一个即可显示 “上传图片” 的tab。但是两者不要同时使用！！！
      *
      * 参考：https://www.kancloud.cn/wangfupeng/wangeditor3/335780
      */
-    'uploadImgShowBase64' => 'false',  // true - 使用 base64 编码图片；当为 false 时会使用下面服务器上传图片
-    'uploadImgServer' => '/laravel-wang-editor/upload',
+    'uploadImgShowBase64' => 'true',  // true - 使用 base64 编码图片；当为 false 时会使用下面服务器上传图片
+    'uploadImgServer' => '/laravel-wang-editor/upload',  // 上传图片的服务器端接口地址
 
     /**
      * 前端限制上传的图片大小，默认5MB = 5*1024*1024 
