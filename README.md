@@ -49,7 +49,9 @@ php artisan vendor:publish --force
 
 ## 使用说明
 
-在 `blade` 模版里面使用下面三个方法：`we_css()` 、`we_js()` 和 `we_config()` 。
+在 `blade` 模版里面使用下面三个方法：`we_css()` 、`we_js()` 、`we_field()` 和 `we_config()` 。
+
+>   请注意 `we_field()` 与 `we_config()` 第一个参数（对应下面示例中的 `wangeditor` ) 必须保持一致。 
 
 ```html
 <!DOCTYPE html>
@@ -58,17 +60,11 @@ php artisan vendor:publish --force
     <meta charset="UTF-8">
     <title>wangEditor example</title>
     {!! we_css() !!}
+    {!! we_js() !!}
 </head>
 <body>
 <h2>wangEditor example</h2>
-
-    <div id="wangeditor">
-        <p>wangEditor for Laravel</p>
-    </div>
-    <textarea class="form-control" name="content" id="wangeditor_text" style="display:none;height:400px;" cols="5">
-    </textarea>
-
-{!! we_js() !!}
+{!! we_field('wangeditor', '<p>wangEditor for Laravel</p>') !!}
 {!! we_config('wangeditor') !!}
 </body>
 </html>
