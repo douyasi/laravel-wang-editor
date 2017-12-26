@@ -17,7 +17,7 @@
 2. 上传的图片使用 其自身文件 `md5` 值作为文件名，以减少当天相同图片重复上传占用存储空间问题；
 3. `wangEditor` 静态资源目录变更，`config/wang-editor.php` 相关配置项的变更。
 
->   旧版 `wangEditor` （2.x版本）适配包请查阅 [1.0](https://github.com/douyasi/laravel-wang-editor/tree/1.x) 分支说明。
+>   旧版 `wangEditor` （2.x版本）适配包请查阅 [1.x](https://github.com/douyasi/laravel-wang-editor/tree/1.x) 分支说明。
 
 ## 兼容版本
 
