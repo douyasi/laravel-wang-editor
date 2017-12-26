@@ -41,7 +41,7 @@ function we_js($using_min = true)
 /**
  * wangEditor 初始化配置js代码
  * 
- * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `mdeditor` 字符串
+ * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `wangeditor` 字符串
  * @return string
  */
 function we_config($editor_id = 'wangeditor')
@@ -120,19 +120,20 @@ EOT;
 }
 
 /**
- * wangEditor form field 快捷生成
+ * wangEditor 表单字段快捷生成
  * 
- * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `mdeditor` 字符串
+ * @param  string $editor_id 编辑器 `textarea` 所属id值，默认取 `wangeditor` 字符串
+ * @param  string $field_name 编辑器 `textarea` name 属性值，默认取 `content` 字符串
  * @param  string $default 编辑器默认正文内容
  * @return string
  */
-function we_field($editor_id = 'wangeditor', $default = '')
+function we_field($editor_id = 'wangeditor', $field_name = 'content', $default = '')
 {
     $html = <<<EOT
 <div id="{$editor_id}">
     {$default}
 </div>
-<textarea class="form-control" name="content" id="{$editor_id}_text" style="display:none;height:400px;" cols="5">
+<textarea class="form-control" name="{$field_name}" id="{$editor_id}_text" style="display:none;height:400px;" cols="5">
 </textarea>
 EOT;
     return $html;
