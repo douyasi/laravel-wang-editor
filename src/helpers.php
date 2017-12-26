@@ -48,9 +48,10 @@ function we_config($editor_id = 'wangeditor')
 {
     $uploadImgServer = config('wang-editor.uploadImgServer', '/laravel-wang-editor/upload');
     $pasteFilterStyle = config('wang-editor.pasteFilterStyle', 'false');
-    $pasteText = 'true';
     if ($pasteFilterStyle == 'false') {
         $pasteTextHandle = config('wang-editor.pasteTextHandle', 'function (content) { return content; }');
+    } else {
+        $pasteTextHandle = '';
     }
     $token = csrf_token();
     $showLinkImg = config('wang-editor.showLinkImg', 'false');
