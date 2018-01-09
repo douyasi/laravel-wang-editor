@@ -25,6 +25,9 @@
             "providers": [
                 "Douyasi\\WangEditor\\EditorServiceProvider"
             ],
+            "dont-discover": [
+                "barryvdh/laravel-debugbar"
+            ]
         }
     },
     "minimum-stability": "dev"
