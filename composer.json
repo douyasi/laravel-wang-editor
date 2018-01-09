@@ -20,5 +20,12 @@
             "src/helpers.php"
         ]
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Douyasi\\WangEditor\\EditorServiceProvider"
+            ],
+        }
+    },
     "minimum-stability": "dev"
 }
