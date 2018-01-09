@@ -32,11 +32,11 @@ class EditorServiceProvider extends \Illuminate\Support\ServiceProvider
         //配置
         $configPath = __DIR__ . '/../config/wang-editor.php';
         $this->mergeConfigFrom($configPath, 'wang-editor');
-        $this->publishes([$configPath => config_path('wang-editor.php')], 'config');
+        $this->publishes([$configPath => config_path('wang-editor.php')]);
 
         //公共资源
         $publicPath = __DIR__ . '/../public';
-        $this->publishes([$publicPath => public_path('')], 'public');
+        $this->publishes([$publicPath => public_path('')]);
 
         //视图
         $viewPath = __DIR__ . '/../resources/views';
